@@ -1,4 +1,4 @@
-import "./Todo-list-item.css";
+import styles from "./Todo-list-item.module.css";
 import { BsCheckLg, BsXLg, BsTrash } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { useRef, useState } from "react";
@@ -20,21 +20,34 @@ const TodoItem = (props) => {
   };
   return (
     <li key={props.id} ref={liRef}>
-      <div className={`todo-text ${status}`}>{props.text}</div>
-      <button>
-        <BsCheckLg onClick={checkedHandler} style={{ color: "green" }} />
+      {status === "pending" && (
+        <div className={styles["pending-animation"]}>
+          <div className={styles["lds-ellipsis"]}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
+      <div
+        className={`${styles["todo-text"]} ${styles[status]} ${styles.opacity}`}
+      >
+        {props.text}
+      </div>
+      <button onClick={checkedHandler}>
+        <BsCheckLg style={{ color: "green" }} />
       </button>
-      <button>
+      <button onClick={pendingHandler}>
         <MdPendingActions
-          onClick={pendingHandler}
-          style={{ color: "orange" }}
+          style={{ color: "orange", transform: "scale(1.2)" }}
         />
       </button>
-      <button>
-        <BsXLg onClick={cancelledHandler} style={{ color: "red" }} />
+      <button onClick={cancelledHandler}>
+        <BsXLg style={{ color: "red" }} />
       </button>
-      <button>
-        <BsTrash onClick={deleteHandler} style={{ color: "black" }} />
+      <button onClick={deleteHandler}>
+        <BsTrash style={{ color: "black" }} />
       </button>
     </li>
   );

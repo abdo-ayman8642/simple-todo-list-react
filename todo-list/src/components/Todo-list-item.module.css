@@ -1,0 +1,131 @@
+li {
+  display: flex;
+  height: 5rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.todo-text {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  background-color: white;
+  width: 45rem;
+  font-size: 2rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+li button {
+  width: 4rem;
+  border: 0;
+}
+li button:hover * {
+  opacity: 1;
+}
+li button:active {
+  outline: none;
+}
+.checked {
+  color: green;
+  text-decoration: line-through;
+  border-left: 1rem solid green;
+}
+.pending {
+  color: orange;
+  border-left: 1rem solid orange;
+}
+.cancelled {
+  color: red;
+  border-left: 1rem solid red;
+  text-decoration: underline;
+}
+.cancelled::after {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  content: "Cancelled";
+  color: black;
+  font-size: 1.5rem;
+  font-family: "Courier New", Courier, monospace;
+  width: 2.5rem;
+  height: 100%;
+  font-weight: bolder;
+  top: 0;
+
+  right: -3.5rem;
+}
+.none {
+  color: black;
+  border-left: 1rem solid rgb(149, 139, 139);
+}
+.pending-animation {
+  position: absolute;
+  bottom: 2rem;
+  left: -7rem;
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 70px;
+  height: 100%;
+}
+.lds-ellipsis div {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: orange;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 17px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 17px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 47px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(15px, 0);
+  }
+}
+.opacity ~ button > * {
+  opacity: 0.4;
+}
+
+.checked ~ button:nth-of-type(1) > * {
+  opacity: 1;
+}
+.pending ~ button:nth-of-type(2) > * {
+  opacity: 1;
+}
+.cancelled ~ button:nth-of-type(3) > * {
+  opacity: 1;
+}
