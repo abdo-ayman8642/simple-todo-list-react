@@ -1,0 +1,12 @@
+.App {
+  max-width: 100vw;
+  min-height: 100vh;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 8rem;
+  padding-top: 4.5rem;
+  color: white;
+  text-align: center;
+  font-size: 4rem;
+}
