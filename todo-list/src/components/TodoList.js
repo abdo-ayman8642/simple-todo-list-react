@@ -13,6 +13,7 @@ const TodoList = (props) => {
           status={todo.state}
           id={todo.id}
           onDelete={onDeleteHandler}
+          key={todo.id}
         />
       ))}
     </ul>

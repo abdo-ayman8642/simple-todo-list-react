@@ -17,7 +17,7 @@ const AddTodo = (props) => {
   return (
     <div className={styles.addtodocont}>
       <input
-        type={Text}
+        type={"text"}
         ref={inputRef}
         onKeyDown={addKeyboard}
         maxLength="40"

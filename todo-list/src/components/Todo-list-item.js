@@ -19,7 +19,7 @@ const TodoItem = (props) => {
     props.onDelete(props.id);
   };
   return (
-    <li key={props.id} ref={liRef}>
+    <li ref={liRef}>
       {status === "pending" && (
         <div className={styles["pending-animation"]}>
           <div className={styles["lds-ellipsis"]}>

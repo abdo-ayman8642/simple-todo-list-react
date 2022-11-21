@@ -5,6 +5,7 @@ li {
   margin-bottom: 1rem;
 }
 .todo-text {
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   padding-left: 8px;
