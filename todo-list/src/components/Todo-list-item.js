@@ -12,12 +12,15 @@ const TodoItem = (props) => {
   }, [status]);
   const checkedHandler = () => {
     setStatus("checked");
+    props.onAdjustingstatus(true);
   };
   const pendingHandler = () => {
     setStatus("pending");
+    props.onAdjustingstatus(true);
   };
   const cancelledHandler = () => {
     setStatus("cancelled");
+    props.onAdjustingstatus(true);
   };
   const deleteHandler = () => {
     props.onDelete(props.id);

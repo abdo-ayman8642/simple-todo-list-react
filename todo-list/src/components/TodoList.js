@@ -8,7 +8,9 @@ const TodoList = (props) => {
   const onChangeStatusHandler = (id, state) => {
     props.changeStatus(id, state);
   };
-
+  const onAdjustingstatusHandler = (condition) => {
+    props.onAdjustingstatus(condition);
+  };
   return (
     <ul>
       {props.data.map((todo) => (
@@ -19,6 +21,7 @@ const TodoList = (props) => {
           onDelete={onDeleteHandler}
           onChangeStatus={onChangeStatusHandler}
           key={todo.id}
+          onAdjustingstatus={onAdjustingstatusHandler}
         />
       ))}
     </ul>
