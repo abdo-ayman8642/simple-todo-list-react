@@ -1,10 +1,14 @@
 import TodoItem from "./Todo-list-item";
-import "./TodoList.css";
+import "./TodoList.module.css";
 
 const TodoList = (props) => {
   const onDeleteHandler = (data) => {
     props.deleteItem(data);
   };
+  const onChangeStatusHandler = (id, state) => {
+    props.changeStatus(id, state);
+  };
+
   return (
     <ul>
       {props.data.map((todo) => (
@@ -13,6 +17,7 @@ const TodoList = (props) => {
           status={todo.state}
           id={todo.id}
           onDelete={onDeleteHandler}
+          onChangeStatus={onChangeStatusHandler}
           key={todo.id}
         />
       ))}

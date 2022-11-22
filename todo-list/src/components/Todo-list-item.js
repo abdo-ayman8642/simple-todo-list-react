@@ -1,11 +1,15 @@
 import styles from "./Todo-list-item.module.css";
 import { BsCheckLg, BsXLg, BsTrash } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const TodoItem = (props) => {
   const liRef = useRef();
   const [status, setStatus] = useState(props.status || "none");
+  useEffect(() => {
+    props.onChangeStatus(props.id, status);
+    return () => {};
+  }, [status]);
   const checkedHandler = () => {
     setStatus("checked");
   };
