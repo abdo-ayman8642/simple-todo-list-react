@@ -1,14 +1,16 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { IoAdd } from "react-icons/io5";
+import TodoContext from "../store/TodoContext";
 import styles from "./AddTodo.module.css";
-const AddTodo = (props) => {
+const AddTodo = () => {
+  const ctx = useContext(TodoContext);
   const inputRef = useRef();
   const addTodo = () => {
     if (inputRef.current.value.trim() === "") {
       inputRef.current.value = "";
       return;
     }
-    props.addtodoitem(inputRef.current.value);
+    ctx.addtodoitem(inputRef.current.value);
     inputRef.current.value = "";
   };
   const addKeyboard = (e) => {

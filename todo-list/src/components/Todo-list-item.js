@@ -1,30 +1,34 @@
 import styles from "./Todo-list-item.module.css";
 import { BsCheckLg, BsXLg, BsTrash } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import TodoContext from "../store/TodoContext";
 
 const TodoItem = (props) => {
+  const ctx = useContext(TodoContext);
   const liRef = useRef();
   const [status, setStatus] = useState(props.status || "none");
+
   useEffect(() => {
-    props.onChangeStatus(props.id, status);
+    ctx.changeStatus(props.id, status);
+    ctx.onAdjustingstatus(true);
     return () => {};
   }, [status]);
-  const checkedHandler = () => {
-    setStatus("checked");
-    props.onAdjustingstatus(true);
+
+  const changeStatusHandler = (event) => {
+    let buttonElement = event.target;
+    //because we might target what inside button like svg,path
+    while (!buttonElement.getAttribute("data-key")) {
+      buttonElement = buttonElement.parentElement;
+    }
+    const status = buttonElement.getAttribute("data-key");
+    setStatus(status);
   };
-  const pendingHandler = () => {
-    setStatus("pending");
-    props.onAdjustingstatus(true);
-  };
-  const cancelledHandler = () => {
-    setStatus("cancelled");
-    props.onAdjustingstatus(true);
-  };
+
   const deleteHandler = () => {
-    props.onDelete(props.id);
+    ctx.deleteItem(props.id);
   };
+
   return (
     <li ref={liRef}>
       {status === "pending" && (
@@ -42,15 +46,15 @@ const TodoItem = (props) => {
       >
         {props.text}
       </div>
-      <button onClick={checkedHandler}>
+      <button data-key={"checked"} onClick={changeStatusHandler}>
         <BsCheckLg style={{ color: "green" }} />
       </button>
-      <button onClick={pendingHandler}>
+      <button data-key={"pending"} onClick={changeStatusHandler}>
         <MdPendingActions
           style={{ color: "orange", transform: "scale(1.2)" }}
         />
       </button>
-      <button onClick={cancelledHandler}>
+      <button data-key={"cancelled"} onClick={changeStatusHandler}>
         <BsXLg style={{ color: "red" }} />
       </button>
       <button onClick={deleteHandler}>
@@ -59,4 +63,5 @@ const TodoItem = (props) => {
     </li>
   );
 };
+
 export default TodoItem;
