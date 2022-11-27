@@ -1,32 +1,31 @@
 import styles from "./Todo-list-item.module.css";
 import { BsCheckLg, BsXLg, BsTrash } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
-import { useContext, useEffect, useRef, useState } from "react";
-import TodoContext from "../store/TodoContext";
+import { useRef, useState } from "react";
+import { todoActions } from "../store/todoSlice";
+import { useDispatch } from "react-redux";
 
 const TodoItem = (props) => {
-  const ctx = useContext(TodoContext);
+  const dispatch = useDispatch();
   const liRef = useRef();
   const [status, setStatus] = useState(props.status || "none");
-
-  useEffect(() => {
-    ctx.changeStatus(props.id, status);
-    ctx.onAdjustingstatus(true);
-    return () => {};
-  }, [status]);
-
   const changeStatusHandler = (event) => {
     let buttonElement = event.target;
     //because we might target what inside button like svg,path
     while (!buttonElement.getAttribute("data-key")) {
       buttonElement = buttonElement.parentElement;
     }
-    const status = buttonElement.getAttribute("data-key");
-    setStatus(status);
+    const currStatus = buttonElement.getAttribute("data-key");
+
+    setStatus(currStatus);
+
+    dispatch(todoActions.changeStatus({ status: currStatus, id: props.id }));
+    dispatch(todoActions.saveData());
   };
 
   const deleteHandler = () => {
-    ctx.deleteItem(props.id);
+    dispatch(todoActions.deleteItem(props.id));
+    dispatch(todoActions.saveData());
   };
 
   return (

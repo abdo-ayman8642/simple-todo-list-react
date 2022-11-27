@@ -1,16 +1,18 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { IoAdd } from "react-icons/io5";
-import TodoContext from "../store/TodoContext";
 import styles from "./AddTodo.module.css";
+import { todoActions } from "../store/todoSlice";
+import { useDispatch } from "react-redux";
 const AddTodo = () => {
-  const ctx = useContext(TodoContext);
+  const dispatch = useDispatch();
   const inputRef = useRef();
   const addTodo = () => {
     if (inputRef.current.value.trim() === "") {
       inputRef.current.value = "";
       return;
     }
-    ctx.addtodoitem(inputRef.current.value);
+    dispatch(todoActions.addtodoitem(inputRef.current.value));
+    dispatch(todoActions.saveData());
     inputRef.current.value = "";
   };
   const addKeyboard = (e) => {
