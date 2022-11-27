@@ -15,6 +15,9 @@ const TodoSlice = createSlice({
   name: "Todo",
   initialState: initialTodo,
   reducers: {
+    reset(state) {
+      state.showMessage = false;
+    },
     saveData(state) {
       state.showMessage = true;
       localStorage.setItem("todoData", JSON.stringify(state.items));
